@@ -60,7 +60,7 @@ def post_cities(state_id):
         if "name" not in request.get_json().keys():
             return jsonify("Missing name"), 400, {'Content-Type':
                                                   'application/json'}
-        new_object = State(**request.get_json())
+        new_object = City(**request.get_json())
         new_object.state_id = state_id
         new_object.save()
         return jsonify(new_object.to_dict()), 201
@@ -80,7 +80,7 @@ def update_city_by_id(city_id):
         if object is None:
             return app.not_found(404)
         for key, value in kwargs.items():
-            if key not in ["id", "updated_at", "created_at"]:
+            if key not in ["id", "state_id", "created_at", "updated_at"]:
                 setattr(object, key, value)
         object.save()
         return jsonify(object.to_dict()), 200
