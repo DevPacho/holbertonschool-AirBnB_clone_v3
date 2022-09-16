@@ -40,7 +40,7 @@ def delete_state_by_id(state_id):
             object = storage.get(State, state_id)
             storage.delete(object)
             storage.save()
-            return jsonify({}), 200
+            return jsonify({}), 200, {'Content-Type': 'application/json'}
 
     abort(404)
 
