@@ -21,9 +21,12 @@ def close(self):
 
 
 @app.errorhandler(404)
-def not_found(error):
+def not_found(e):
     """Error handler of page not found"""
-    return make_response(jsonify({"error": "Not found"}), 404)
+    error = {
+        "error": "Not found"
+    }
+    return make_response(jsonify(error), 404)
 
 
 if __name__ == "__main__":
