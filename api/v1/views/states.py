@@ -46,14 +46,13 @@ def post_states():
 
     try:
         if "name" not in request.get_json().keys():
-            return jsonify("Missing name"), 400, {'Content-Type':
-                                                  'application/json'}
+            abort(400, description="Missing name")
+
         new_object = State(**request.get_json())
         new_object.save()
         return jsonify(new_object.to_dict()), 201
     except Exception:
-        return jsonify("Not a JSON"), 400, {'Content-Type':
-                                            'application/json'}
+        abort(400, description="Not a JSON")
 
 
 @app_views.route(
@@ -72,5 +71,4 @@ def update_state_by_id(state_id):
         object.save()
         return jsonify(object.to_dict()), 200
     except Exception:
-        return jsonify("Not a JSON"), 400, {'Content-Type':
-                                            'application/json'}
+        abort(400, description="Not a JSON")
