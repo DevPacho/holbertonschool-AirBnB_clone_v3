@@ -35,6 +35,6 @@ if __name__ == "__main__":
         HBNB_API_HOST = "0.0.0.0"
 
     if not HBNB_API_PORT:
-        HBNB_API_PORT = "5000"
+        HBNB_API_PORT = 5000
 
     app.run(host=HBNB_API_HOST, port=HBNB_API_PORT, debug=True, threaded=True)
