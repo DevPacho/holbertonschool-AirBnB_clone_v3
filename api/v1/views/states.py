@@ -46,10 +46,10 @@ def delete_state_by_id(state_id):
 def post_states():
     """Creating a new state"""
 
-    if "name" not in request.get_json().keys():
-        return jsonify("Missing name"), 400, {'Content-Type':
-                                              'application/json'}
     try:
+        if "name" not in request.get_json().keys():
+            return jsonify("Missing name"), 400, {'Content-Type':
+                                                  'application/json'}
         new_state = State(**request.get_json())
         new_state.save()
         return jsonify(new_state.to_dict()), 201
