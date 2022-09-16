@@ -44,15 +44,15 @@ def delete_state_by_id(state_id):
 def post_states():
     """Creating a new state"""
 
-    try:
-        if "name" not in request.get_json().keys():
-            abort(400, "Missing name")
+    if "name" not in request.get_json().keys():
+        abort(400, "Missing name")
 
-        new_object = State(**request.get_json())
-        new_object.save()
-        return jsonify(new_object.to_dict()), 201
-    except Exception:
+    if not request.get_json():
         abort(400, "Not a JSON")
+
+    new_object = State(**request.get_json())
+    new_object.save()
+    return jsonify(new_object.to_dict()), 201
 
 
 @app_views.route(
@@ -60,15 +60,16 @@ def post_states():
 def update_state_by_id(state_id):
     """Updates a State object"""
 
-    try:
-        kwargs = request.get_json()
-        object = storage.get(State, state_id)
-        if object is None:
-            abort(404)
-        for key, value in kwargs.items():
-            if key not in ["id", "updated_at", "created_at"]:
-                setattr(object, key, value)
-        object.save()
-        return jsonify(object.to_dict()), 200
-    except Exception:
+    kwargs = request.get_json()
+
+    object = storage.get(State, state_id)
+    if object is None:
+        abort(404)
+    if not request.get_json():
         abort(400, "Not a JSON")
+
+    for key, value in kwargs.items():
+        if key not in ["id", "updated_at", "created_at"]:
+            setattr(object, key, value)
+    object.save()
+    return jsonify(object.to_dict()), 200
