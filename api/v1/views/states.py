@@ -35,14 +35,12 @@ def get_state_by_id(state_id):
 def delete_state_by_id(state_id):
     """Deletes a State object"""
 
-    for state in list(storage.all(State).values()):
-        if state.id == state_id:
-            object = storage.get(State, state_id)
-            storage.delete(object)
-            storage.save()
-            return jsonify({}), 200, {'Content-Type': 'application/json'}
-
-    abort(404)
+    object = storage.get(State, state_id)
+    if object is None:
+        return app.not_found(404)
+    storage.delete(object)
+    storage.save()
+    return jsonify({}), 200
 
 
 @app_views.route("/states", strict_slashes=False, methods=["POST"])
@@ -65,7 +63,7 @@ def post_states():
 
 
 @app_views.route(
-    "/states/<state_id>", strict_slashes=False, methods=["PUT"])
+        "/states/<state_id>", strict_slashes=False, methods=["PUT"])
 def update_state_by_id(state_id):
     """Updates a State object"""
 
