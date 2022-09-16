@@ -2,11 +2,10 @@
 """ Handles all default RESTFul API actions for 'City' class """
 
 from api.v1.views import app_views
-from flask import jsonify, request
+from flask import jsonify, request, abort
 from models.state import State
 from models.city import City
 from models import storage
-from api.v1 import app
 
 
 @app_views.route(
@@ -16,7 +15,7 @@ def get_cities(state_id):
 
     object = storage.get(State, state_id)
     if object is None:
-        return app.not_found(404)
+        abort(404)
 
     all_objects = []
     for obj in object.cities:
@@ -30,7 +29,7 @@ def get_city_by_id(city_id):
 
     object = storage.get(City, city_id)
     if object is None:
-        return app.not_found(404)
+        abort(404)
     return jsonify(object.to_dict())
 
 
@@ -41,7 +40,7 @@ def delete_city_by_id(city_id):
 
     object = storage.get(City, city_id)
     if object is None:
-        return app.not_found(404)
+        abort(404)
     storage.delete(object)
     storage.save()
     return jsonify({}), 200
@@ -55,7 +54,7 @@ def post_cities(state_id):
     try:
         object = storage.get(State, state_id)
         if object is None:
-            return app.not_found(404)
+            abort(404)
 
         if "name" not in request.get_json().keys():
             return jsonify("Missing name"), 400, {'Content-Type':
@@ -78,7 +77,7 @@ def update_city_by_id(city_id):
         kwargs = request.get_json()
         object = storage.get(City, city_id)
         if object is None:
-            return app.not_found(404)
+            abort(404)
         for key, value in kwargs.items():
             if key not in ["id", "state_id", "created_at", "updated_at"]:
                 setattr(object, key, value)

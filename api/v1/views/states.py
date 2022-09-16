@@ -2,10 +2,9 @@
 """ Handles all default RESTFul API actions """
 
 from api.v1.views import app_views
-from flask import jsonify, request
+from flask import jsonify, request, abort
 from models.state import State
 from models import storage
-from api.v1 import app
 
 
 @app_views.route("/states", strict_slashes=False, methods=["GET"])
@@ -24,7 +23,7 @@ def get_state_by_id(state_id):
 
     object = storage.get(State, state_id)
     if object is None:
-        return app.not_found(404)
+        abort(404)
     return jsonify(object.to_dict())
 
 
@@ -35,7 +34,7 @@ def delete_state_by_id(state_id):
 
     object = storage.get(State, state_id)
     if object is None:
-        return app.not_found(404)
+        abort(404)
     storage.delete(object)
     storage.save()
     return jsonify({}), 200
@@ -66,7 +65,7 @@ def update_state_by_id(state_id):
         kwargs = request.get_json()
         object = storage.get(State, state_id)
         if object is None:
-            return app.not_found(404)
+            abort(404)
         for key, value in kwargs.items():
             if key not in ["id", "updated_at", "created_at"]:
                 setattr(object, key, value)
