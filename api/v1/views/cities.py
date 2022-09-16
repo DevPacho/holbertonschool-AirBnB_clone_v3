@@ -57,14 +57,14 @@ def post_cities(state_id):
             abort(404)
 
         if "name" not in request.get_json().keys():
-            abort(400, description="Missing name")
+            abort(400, "Missing name")
 
         new_object = City(**request.get_json())
         new_object.state_id = state_id
         new_object.save()
         return jsonify(new_object.to_dict()), 201
     except Exception:
-        abort(400, description="Not a JSON")
+        abort(400, "Not a JSON")
 
 
 @app_views.route(
@@ -83,4 +83,4 @@ def update_city_by_id(city_id):
         object.save()
         return jsonify(object.to_dict()), 200
     except Exception:
-        abort(400, description="Not a JSON")
+        abort(400, "Not a JSON")
