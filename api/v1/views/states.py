@@ -44,11 +44,11 @@ def delete_state_by_id(state_id):
 def post_states():
     """Creating a new state"""
 
-    if "name" not in request.get_json().keys():
-        abort(400, "Missing name")
-
     if not request.get_json():
         abort(400, "Not a JSON")
+
+    if "name" not in request.get_json().keys():
+        abort(400, "Missing name")
 
     new_object = State(**request.get_json())
     new_object.save()
