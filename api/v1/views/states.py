@@ -62,3 +62,24 @@ def post_states():
     except Exception:
         return jsonify("Not a JSON"), 400, {'Content-Type':
                                             'application/json'}
+
+
+@app_views.route(
+    "/states/<state_id>", strict_slashes=False, methods=["PUT"])
+def update_state_by_id(state_id):
+    """Updates a State object"""
+
+    try:
+        for state in list(storage.all(State).values()):
+            if state.id == state_id:
+                kwargs = request.get_json()
+                state = state.to_dict()
+                for key, value in kwargs.items():
+                    if key not in ["id", "updated_at", "created_at"]:
+                        state[key] = value
+                storage.save()   
+                return jsonify(state), 200
+        abort(404)
+    except Exception:
+        return jsonify("Not a JSON"), 400, {'Content-Type':
+                                            'application/json'}
