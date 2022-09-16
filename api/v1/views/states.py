@@ -23,11 +23,10 @@ def get_states():
 def get_state_by_id(state_id):
     """Retrieves a State object"""
 
-    for state in list(storage.all(State).values()):
-        if state.id == state_id:
-            return jsonify(state.to_dict())
-
-    abort(404)
+    object = storage.get(State, state_id)
+    if object is None:
+        return app.not_found(404)
+    return jsonify(object.to_dict())
 
 
 @app_views.route(
