@@ -12,10 +12,10 @@ from api.v1 import app
 def get_states():
     """Retrieves the list of all State objects"""
 
-    all_states = []
-    for state in list(storage.all(State).values()):
-        all_states.append(state.to_dict())
-    return jsonify(all_states)
+    all_objects = []
+    for object in list(storage.all(State).values()):
+        all_objects.append(object.to_dict())
+    return jsonify(all_objects)
 
 
 @app_views.route("/states/<state_id>", strict_slashes=False, methods=["GET"])
@@ -49,9 +49,9 @@ def post_states():
         if "name" not in request.get_json().keys():
             return jsonify("Missing name"), 400, {'Content-Type':
                                                   'application/json'}
-        new_state = State(**request.get_json())
-        new_state.save()
-        return jsonify(new_state.to_dict()), 201
+        new_object = State(**request.get_json())
+        new_object.save()
+        return jsonify(new_object.to_dict()), 201
     except Exception:
         return jsonify("Not a JSON"), 400, {'Content-Type':
                                             'application/json'}
