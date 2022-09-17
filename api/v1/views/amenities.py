@@ -29,7 +29,7 @@ def get_amenity_by_id(amenity_id):
 
 
 @app_views.route(
-    "/amenity/<amenity_id>", strict_slashes=False, methods=["DELETE"])
+    "/amenities/<amenity_id>", strict_slashes=False, methods=["DELETE"])
 def delete_amenity_by_id(amenity_id):
     """Deletes an Amenity object"""
 
