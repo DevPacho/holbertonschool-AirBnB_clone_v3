@@ -51,13 +51,12 @@ def delete_place_by_id(place_id):
     "/cities/<city_id>/places", strict_slashes=False, methods=["POST"])
 def post_places(city_id):
     """Creating a new Place"""
+    if not request.get_json():
+        abort(400, "Not a JSON")
 
     object = storage.get(City, city_id)
     if object is None:
         abort(404)
-
-    if not request.get_json():
-        abort(400, "Not a JSON")
 
     if "user_id" not in request.get_json().keys():
         abort(400, "Missing user_id")
