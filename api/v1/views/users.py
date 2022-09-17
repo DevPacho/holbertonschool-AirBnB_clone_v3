@@ -73,7 +73,7 @@ def update_user_by_id(user_id):
         abort(400, "Not a JSON")
 
     for key, value in kwargs.items():
-        if key not in ["id", "updated_at", "created_at"]:
+        if key not in ["id", "updated_at", "created_at", "email"]:
             setattr(object, key, value)
     object.save()
     return jsonify(object.to_dict()), 200
