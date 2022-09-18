@@ -37,12 +37,9 @@ def delete_amenity_from_place(place_id, amenity_id):
     for obj in place.amenities:
         if obj.id == amenity_id:
             amenity_place = obj
-    if amenity_place is not None:
+    if amenity_place is None:
         abort(404)
-    if storage_t != 'db':
-        place.amenities.pop(amenity)
-    else:
-        del place.amenities[amenity]
+    place.amenities.remove(amenity)
     storage.save()
     return jsonify({}), 200
 
