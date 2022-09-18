@@ -155,7 +155,8 @@ EOF  all  create  destroy  help  quit  show  update
 ### URIs - resource name:
 * GET - POST: /states
 * GET - PUT - DELETE: /states/<state_id>
-* 
+* GET - POST: /states/<state_id>/cities
+* GET - PUT - DELETE: /cities/<city_id>
 
 ## Bugs
 No known bugs at this time. 
