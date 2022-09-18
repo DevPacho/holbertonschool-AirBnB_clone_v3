@@ -159,6 +159,8 @@ EOF  all  create  destroy  help  quit  show  update
 * GET - PUT - DELETE: /cities/<city_id>
 * GET - POST: /cities/<city_id>/places
 * GET - PUT - DELETE: /places/<place_id>
+* GET - POST: /users
+* GET - PUT - DELETE: /users/<user_id>
 
 ## Bugs
 No known bugs at this time. 
