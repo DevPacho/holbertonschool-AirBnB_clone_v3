@@ -64,6 +64,7 @@ Classes inherited from Base Model:
 * `def delete(self)` -  deletes obj from __objects
 * `def close(self)` -  calls reload method.
 * `def get(self, cls, id)` -  Retrieves an object.
+* `def count(self)` -  counts the number of objects.
 
 #### `/tests` directory contains all unit test cases for this project:
 [/test_models/test_base_model.py](/tests/test_models/test_base_model.py) - Contains the TestBaseModel and TestBaseModelDocs classes
