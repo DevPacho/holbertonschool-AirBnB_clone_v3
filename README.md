@@ -152,7 +152,9 @@ EOF  all  create  destroy  help  quit  show  update
 ```
 
 ## RESTful API
-
+### URIs - resource name:
+* GET /states
+* GET /states/<state_id>
 
 ## Bugs
 No known bugs at this time. 
