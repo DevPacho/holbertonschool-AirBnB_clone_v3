@@ -163,7 +163,8 @@ EOF  all  create  destroy  help  quit  show  update
 * GET - PUT - DELETE: /users/<user_id>
 * GET - POST: /amenities
 * GET - PUT - DELETE: /amenities/<amenity_id>
-
+* GET - POST: /places/<place_id>/reviews
+* GET - PUT - DELETE: /reviews/<review_id>
 
 ## Bugs
 No known bugs at this time. 
