@@ -153,6 +153,7 @@ EOF  all  create  destroy  help  quit  show  update
 
 ## RESTful API
 Blueprint: url_prefix="/api/v1"
+
 ### URIs - resource name:
 * GET - POST: /states
 * GET - PUT - DELETE: /states/<state_id>
@@ -168,6 +169,12 @@ Blueprint: url_prefix="/api/v1"
 * GET - PUT - DELETE: /reviews/<review_id>
 * GET: places/<place_id>/amenities
 * POST - DELETE: places/<place_id>/amenities/<amenity_id>
+
+### Status codes:
+    200: OK
+    201: created => after a POST request
+    400: bad request => the server doesn’t understand the request
+    404: not found => resource doesn’t exist
 
 ## Bugs
 No known bugs at this time. 
