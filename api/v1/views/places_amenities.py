@@ -10,7 +10,7 @@ from models import storage, storage_t
 
 @app_views.route(
     "places/<place_id>/amenities", strict_slashes=False, methods=["GET"])
-def get_amenities(place_id):
+def get_amenities_by_place(place_id):
     """Retrieves the list of all Amenity objects"""
 
     object = storage.get(Place, place_id)
@@ -64,8 +64,4 @@ def post_amenity_to_place(place_id, amenity_id):
             place.amenities.append(amenity)
         else:
             place.amenities[amenity]
-
-    new_object = Review(**request.get_json())
-    new_object.place_id = place_id
-    new_object.save()
-    return jsonify(new_object.to_dict()), 201
+        return jsonify(amenity.to_dict()), 201
