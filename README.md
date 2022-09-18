@@ -14,6 +14,7 @@ The console is the first segment of the AirBnB project at Holberton School that 
 * [File Descriptions](#file-descriptions)
 * [Usage](#usage)
 * [Examples of use](#examples-of-use)
+* [RESTful API](#RESTful-API)
 * [Bugs](#bugs)
 * [Authors](#authors)
 * [License](#license)
@@ -149,6 +150,9 @@ EOF  all  create  destroy  help  quit  show  update
 ** no instance found **
 (hbnb) quit
 ```
+
+## RESTful API
+
 
 ## Bugs
 No known bugs at this time. 
