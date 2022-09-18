@@ -39,7 +39,10 @@ def delete_amenity_from_place(place_id, amenity_id):
             amenity_place = obj
     if amenity_place is not None:
         abort(404)
-    storage.delete(obj)
+    if storage_t != 'db':
+        place.amenities.pop(amenity)
+    else:
+        del place.amenities[amenity]
     storage.save()
     return jsonify({}), 200
 
@@ -64,4 +67,5 @@ def post_amenity_to_place(place_id, amenity_id):
             place.amenities.append(amenity)
         else:
             place.amenities[amenity]
+        storage.save()
         return jsonify(amenity.to_dict()), 201
