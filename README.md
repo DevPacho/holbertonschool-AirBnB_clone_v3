@@ -152,6 +152,7 @@ EOF  all  create  destroy  help  quit  show  update
 ```
 
 ## RESTful API
+Blueprint: url_prefix="/api/v1"
 ### URIs - resource name:
 * GET - POST: /states
 * GET - PUT - DELETE: /states/<state_id>
