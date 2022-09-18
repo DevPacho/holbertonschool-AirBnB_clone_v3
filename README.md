@@ -156,6 +156,7 @@ Blueprint: url_prefix="/api/v1"
 
 ### URIs - resource name:
 * GET: /status
+* GET: /stats
 * GET - POST: /states
 * GET - PUT - DELETE: /states/<state_id>
 * GET - POST: /states/<state_id>/cities
